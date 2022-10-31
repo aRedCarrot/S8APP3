@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  logsapi:
+    image: ${DOCKER_REGISTRY-}logsapi
+    build:
+      context: .
+      dockerfile: LogsAPI/Dockerfile
+    ports:
+        - "8080:80"
+        - "8443:443"
+        - "8022:22"

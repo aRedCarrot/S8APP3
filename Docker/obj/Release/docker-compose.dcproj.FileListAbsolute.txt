@@ -1,0 +1,15 @@
+E:\s8\APP3\S8APP3\logs\LogsAPI\bin\Release\LogsAPI.deps.json
+E:\s8\APP3\S8APP3\logs\LogsAPI\bin\Release\LogsAPI.runtimeconfig.json
+E:\s8\APP3\S8APP3\logs\LogsAPI\bin\Release\appsettings.Development.json
+E:\s8\APP3\S8APP3\logs\LogsAPI\bin\Release\appsettings.json
+E:\s8\APP3\S8APP3\logs\LogsAPI\bin\Release\LogsAPI.exe
+E:\s8\APP3\S8APP3\logs\LogsAPI\bin\Release\LogsAPI.dll
+E:\s8\APP3\S8APP3\logs\LogsAPI\bin\Release\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\s8\APP3\S8APP3\logs\LogsAPI\bin\Release\Swashbuckle.AspNetCore.Swagger.dll
+E:\s8\APP3\S8APP3\logs\LogsAPI\bin\Release\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\s8\APP3\S8APP3\logs\LogsAPI\bin\Release\Newtonsoft.Json.dll
+E:\s8\APP3\S8APP3\logs\LogsAPI\bin\Release\Microsoft.OpenApi.dll
+E:\s8\APP3\S8APP3\logs\LogsAPI\bin\Release\LogsAPI.pdb
+E:\s8\APP3\S8APP3\logs\LogsAPI\obj\Release\docker-compose.dcproj.AssemblyReference.cache
+E:\s8\APP3\S8APP3\logs\LogsAPI\obj\Release\docker-compose.dcproj.CoreCompileInputs.cache
+E:\s8\APP3\S8APP3\logs\LogsAPI\obj\Release\docker-compose.dcproj.CopyComplete

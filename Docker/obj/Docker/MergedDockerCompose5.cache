@@ -1,0 +1,31 @@
+services:
+  logsapi:
+    build:
+      context: E:\s8\APP3\S8APP3\logs\LogsAPI
+      dockerfile: LogsAPI/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: LogsAPI
+    container_name: LogsAPI_1
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: logsapi
+    labels:
+      com.microsoft.visual-studio.project-name: LogsAPI
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
+        --additionalProbingPath /root/.nuget/fallbackpackages  "/app/LogsAPI.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - target: 80
+    - target: 443
+    tty: true
+    volumes:
+    - C:\Users\Claude G-P\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\Claude G-P\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\Claude G-P\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'

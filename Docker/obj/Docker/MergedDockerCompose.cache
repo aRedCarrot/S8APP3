@@ -1,0 +1,16 @@
+services:
+  webapplication1:
+    build:
+      context: E:\s8\APP3\S8APP3\logs\LogsAPI
+      dockerfile: WebApplication1/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: webapplication1
+    ports:
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\Claude G-P\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\Claude G-P\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'
