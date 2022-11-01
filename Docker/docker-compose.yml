@@ -20,3 +20,9 @@ services:
     ports:
         - "8081:80"
         - "8444:443"
+  attacker:
+    image: ${DOCKER_REGISTRY}attacker
+    container_name: attacker
+    build:
+      context: attacker
+      dockerfile: Dockerfile
