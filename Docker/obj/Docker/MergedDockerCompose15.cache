@@ -1,0 +1,34 @@
+services:
+  app3_fredfanpage:
+    build:
+      context: C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker
+      dockerfile: APP3_FredFanPage/Dockerfile
+    container_name: fredfanpage
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: app3fredfanpage
+    ports:
+    - published: 8081
+      target: 80
+    - target: 80
+  logsapi:
+    build:
+      context: C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker
+      dockerfile: LogsAPI/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: logsapi
+    ports:
+    - published: 8022
+      target: 22
+    - published: 8080
+      target: 80
+    - target: 80
+    - published: 8443
+      target: 443
+    - target: 443
+    volumes:
+    - C:\Users\legros02\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\legros02\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'

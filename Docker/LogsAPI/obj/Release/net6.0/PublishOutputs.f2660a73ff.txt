@@ -1,0 +1,13 @@
+C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\LogsAPI\obj\Release\net6.0\PubTmp\Out\LogsAPI.exe
+C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\LogsAPI\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\LogsAPI\obj\Release\net6.0\PubTmp\Out\appsettings.json
+C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\LogsAPI\obj\Release\net6.0\PubTmp\Out\LogsAPI.dll
+C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\LogsAPI\obj\Release\net6.0\PubTmp\Out\LogsAPI.deps.json
+C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\LogsAPI\obj\Release\net6.0\PubTmp\Out\LogsAPI.runtimeconfig.json
+C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\LogsAPI\obj\Release\net6.0\PubTmp\Out\LogsAPI.pdb
+C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\LogsAPI\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
+C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\LogsAPI\obj\Release\net6.0\PubTmp\Out\Newtonsoft.Json.dll
+C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\LogsAPI\obj\Release\net6.0\PubTmp\Out\Newtonsoft.Json.Bson.dll
+C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\LogsAPI\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\LogsAPI\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\LogsAPI\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
