@@ -402,24 +402,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Claude G-P\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\legros02\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\s8\\APP3\\S8APP3\\Docker\\LogsAPI\\LogsAPI.csproj",
+      "projectUniqueName": "C:\\Users\\legros02\\Documents\\Ecole\\S8\\APP3\\Git\\S8APP3\\Docker\\LogsAPI\\LogsAPI.csproj",
       "projectName": "LogsAPI",
-      "projectPath": "E:\\s8\\APP3\\S8APP3\\Docker\\LogsAPI\\LogsAPI.csproj",
-      "packagesPath": "C:\\Users\\Claude G-P\\.nuget\\packages\\",
-      "outputPath": "E:\\s8\\APP3\\S8APP3\\Docker\\LogsAPI\\obj\\",
+      "projectPath": "C:\\Users\\legros02\\Documents\\Ecole\\S8\\APP3\\Git\\S8APP3\\Docker\\LogsAPI\\LogsAPI.csproj",
+      "packagesPath": "C:\\Users\\legros02\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\legros02\\Documents\\Ecole\\S8\\APP3\\Git\\S8APP3\\Docker\\LogsAPI\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Claude G-P\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\legros02\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -427,7 +422,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

@@ -1,6 +1,32 @@
 version: '3.4'
 
 services:
+  app3_fredfanpage:
+    image: app3fredfanpage:dev
+    build:
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "APP3_FredFanPage"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      - NUGET_FALLBACK_PACKAGES=
+    volumes:
+      - C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\APP3_FredFanPage:/app
+      - C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker:/src
+      - C:\Users\legros02\vsdbg\vs2017u5:/remote_debugger:rw
+      - C:\Users\legros02\.nuget\packages\:/root/.nuget/packages:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages  \"/app/bin/Release/net6.0/APP3_FredFanPage.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true
   logsapi:
     image: logsapi:dev
     container_name: LogsAPI_1
@@ -12,20 +38,19 @@ services:
     environment:
       - DOTNET_USE_POLLING_FILE_WATCHER=1
       - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
-      - NUGET_FALLBACK_PACKAGES=/root/.nuget/fallbackpackages
+      - NUGET_FALLBACK_PACKAGES=
     volumes:
-      - E:\s8\APP3\S8APP3\logs\LogsAPI\LogsAPI:/app
-      - E:\s8\APP3\S8APP3\logs\LogsAPI:/src
-      - C:\Users\Claude G-P\vsdbg\vs2017u5:/remote_debugger:rw
-      - C:\Users\Claude G-P\.nuget\packages\:/root/.nuget/packages:ro
-      - C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages:/root/.nuget/fallbackpackages:ro
+      - C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\LogsAPI:/app
+      - C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker:/src
+      - C:\Users\legros02\vsdbg\vs2017u5:/remote_debugger:rw
+      - C:\Users\legros02\.nuget\packages\:/root/.nuget/packages:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
 
     entrypoint: tail -f /dev/null
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"
-      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages --additionalProbingPath /root/.nuget/fallbackpackages  \"/app/bin/Release/net6.0/LogsAPI.dll\""
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages  \"/app/bin/Release/net6.0/LogsAPI.dll\""
       com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
       com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
     tty: true
