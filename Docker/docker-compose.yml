@@ -3,6 +3,7 @@ version: '3.4'
 services:
   logsapi:
     image: ${DOCKER_REGISTRY-}logsapi
+    container_name: logs_api
     build:
       context: .
       dockerfile: LogsAPI/Dockerfile
