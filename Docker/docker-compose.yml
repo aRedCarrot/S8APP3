@@ -8,7 +8,6 @@ services:
       dockerfile: LogsAPI/Dockerfile
     ports:
         - "8080:80"
-        - "8443:443"
         - "8022:22"
 
   app3_fredfanpage:
@@ -19,7 +18,6 @@ services:
       dockerfile: APP3_FredFanPage/Dockerfile
     ports:
         - "8081:80"
-        - "8444:443"
   attacker:
     image: ${DOCKER_REGISTRY}attacker
     container_name: attacker

@@ -42,8 +42,8 @@ namespace APP3_FredFanPage
 
             app.UseAuthorization();
 
-            app.UseHsts();
-            app.UseHttpsRedirection();
+            //app.UseHsts();
+            //app.UseHttpsRedirection();
 
             app.UseEndpoints(
                 endpoints =>
