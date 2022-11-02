@@ -70,7 +70,7 @@ namespace APP3_FredFanPage.Controllers
             {
                 throw new InvalidOperationException("Vous devez vous connecter");
             }
-
+           
             var cmd = new SqliteCommand(
                 $"insert into Comments (UserId, CommentId, Comment) Values ('{user.Id}','{Guid.NewGuid()}','" + comment + "')",
                 this._dbConnection);
@@ -84,13 +84,15 @@ namespace APP3_FredFanPage.Controllers
         {
             var searchResults = new List<string>();
 
-            var user = await this._userManager.GetUserAsync(this.User);
-            if (user == null || string.IsNullOrEmpty(searchData))
-            {
-                return this.View(searchResults);
-            }
+            //var user = await this._userManager.GetUserAsync(this.User);
+            //if (user == null || string.IsNullOrEmpty(searchData))
+            //{
+            //    return this.View(searchResults);
+            //}
 
-            var cmd = new SqliteCommand($"Select Comment from Comments where UserId = '{user.Id}' and Comment like '%{searchData}%'", this._dbConnection);
+            Console.WriteLine(this._dbConnection);
+
+            var cmd = new SqliteCommand($"Select Comment from Comments where Comment like '%{searchData}%'", this._dbConnection);
             this._dbConnection.Open();
             var rd = await cmd.ExecuteReaderAsync();
             while (rd.Read())
@@ -100,6 +102,8 @@ namespace APP3_FredFanPage.Controllers
 
             rd.Close();
             this._dbConnection.Close();
+
+            //return Ok("Voici le résultat de la recherche" + searchResults);
 
             return this.View(searchResults);
         }
