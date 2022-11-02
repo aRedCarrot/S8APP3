@@ -1,0 +1,68 @@
+services:
+  app3_fredfanpage:
+    build:
+      context: C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker
+      dockerfile: APP3_FredFanPage/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: APP3_FredFanPage
+    container_name: fredfanpage
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:80
+    image: app3fredfanpage
+    labels:
+      com.microsoft.visual-studio.project-name: APP3_FredFanPage
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/APP3_FredFanPage.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - published: 8081
+      target: 80
+    - target: 80
+    tty: true
+    volumes:
+    - C:\Users\legros02\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\legros02\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\legros02\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+  attacker:
+    build:
+      context: C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker\attacker
+      dockerfile: Dockerfile
+    container_name: attacker
+    image: attacker
+  logsapi:
+    build:
+      context: C:\Users\legros02\Documents\Ecole\S8\APP3\Git\S8APP3\Docker
+      dockerfile: LogsAPI/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: LogsAPI
+    container_name: LogsAPI_1
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:80
+    image: logsapi
+    labels:
+      com.microsoft.visual-studio.project-name: LogsAPI
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/LogsAPI.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - published: 8022
+      target: 22
+    - published: 8080
+      target: 80
+    - target: 80
+    tty: true
+    volumes:
+    - C:\Users\legros02\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\legros02\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\legros02\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'
