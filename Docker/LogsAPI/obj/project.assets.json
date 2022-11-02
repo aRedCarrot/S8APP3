@@ -402,19 +402,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\legros02\\.nuget\\packages\\": {}
+    "C:\\Users\\masa3303\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\legros02\\Documents\\Ecole\\S8\\APP3\\Git\\S8APP3\\Docker\\LogsAPI\\LogsAPI.csproj",
+      "projectUniqueName": "C:\\Users\\masa3303\\OneDrive - USherbrooke\\UdeS_Genie_Info\\S8\\app3\\S8APP3\\Docker\\LogsAPI\\LogsAPI.csproj",
       "projectName": "LogsAPI",
-      "projectPath": "C:\\Users\\legros02\\Documents\\Ecole\\S8\\APP3\\Git\\S8APP3\\Docker\\LogsAPI\\LogsAPI.csproj",
-      "packagesPath": "C:\\Users\\legros02\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\legros02\\Documents\\Ecole\\S8\\APP3\\Git\\S8APP3\\Docker\\LogsAPI\\obj\\",
+      "projectPath": "C:\\Users\\masa3303\\OneDrive - USherbrooke\\UdeS_Genie_Info\\S8\\app3\\S8APP3\\Docker\\LogsAPI\\LogsAPI.csproj",
+      "packagesPath": "C:\\Users\\masa3303\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\masa3303\\OneDrive - USherbrooke\\UdeS_Genie_Info\\S8\\app3\\S8APP3\\Docker\\LogsAPI\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\legros02\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\masa3303\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

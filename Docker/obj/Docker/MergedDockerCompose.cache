@@ -1,16 +1,36 @@
 services:
-  webapplication1:
+  app3_fredfanpage:
     build:
-      context: E:\s8\APP3\S8APP3\logs\LogsAPI
-      dockerfile: WebApplication1/Dockerfile
+      context: C:\Users\masa3303\OneDrive - USherbrooke\UdeS_Genie_Info\S8\app3\S8APP3\Docker
+      dockerfile: APP3_FredFanPage/Dockerfile
+    container_name: fredfanpage
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: https://+:443;http://+:80
-    image: webapplication1
+      ASPNETCORE_URLS: http://+:80
+    image: app3fredfanpage
     ports:
+    - published: 8081
+      target: 80
     - target: 80
-    - target: 443
-    volumes:
-    - C:\Users\Claude G-P\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
-    - C:\Users\Claude G-P\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+  attacker:
+    build:
+      context: C:\Users\masa3303\OneDrive - USherbrooke\UdeS_Genie_Info\S8\app3\S8APP3\Docker\attacker
+      dockerfile: Dockerfile
+    container_name: attacker
+    image: attacker
+  logsapi:
+    build:
+      context: C:\Users\masa3303\OneDrive - USherbrooke\UdeS_Genie_Info\S8\app3\S8APP3\Docker
+      dockerfile: LogsAPI/Dockerfile
+    container_name: logs_api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:80
+    image: logsapi
+    ports:
+    - published: 8022
+      target: 22
+    - published: 8080
+      target: 80
+    - target: 80
 version: '3.4'

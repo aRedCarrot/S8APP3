@@ -4,7 +4,7 @@ namespace LogsAPI
     {
         public DateTime Date { get; set; }
 
-        public int Type { get; set; }
+        public int Level { get; set; }
 
         public string? Summary { get; set; }
     }
