@@ -1,0 +1,7 @@
+(
+  rulename = "LogAPI",
+  severity = $(SIG_HI)
+)
+{
+        /app/appsettings.json -> $(SEC_CRIT);
+}
