@@ -103,9 +103,9 @@ namespace APP3_FredFanPage.Controllers
             rd.Close();
             this._dbConnection.Close();
 
-            //return Ok("Voici le résultat de la recherche" + searchResults);
+            return Ok("Voici le résultat de la recherche" + searchResults);
 
-            return this.View(searchResults);
+            //return this.View(searchResults);
         }
 
         public IActionResult About()
