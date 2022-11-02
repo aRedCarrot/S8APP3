@@ -21,6 +21,7 @@ services:
   attacker:
     image: ${DOCKER_REGISTRY}attacker
     container_name: attacker
+    restart: always
     build:
       context: attacker
       dockerfile: Dockerfile
