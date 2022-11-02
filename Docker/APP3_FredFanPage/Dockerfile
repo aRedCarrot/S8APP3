@@ -19,4 +19,8 @@ RUN dotnet publish "APP3_FredFanPage.csproj" -c Release -o /app/publish /p:UseAp
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY ["APP3_FredFanPage/FredFanPage.db", "."]
+RUN apt-get -y update
+RUN apt-get install -y sqlite3 libsqlite3-dev
+RUN /usr/bin/sqlite3 ./FredFanPage.db
 ENTRYPOINT ["dotnet", "APP3_FredFanPage.dll"]
