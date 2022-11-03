@@ -7,7 +7,6 @@ namespace LogsAPI.Controllers
     [Route("[controller]")]
     public class LogsAPIController : ControllerBase
     {
-        private readonly string logsFile = "logs.txt";
 
         private static readonly string[] Summaries = new[]
         {
@@ -15,10 +14,12 @@ namespace LogsAPI.Controllers
     };
 
         private readonly ILogger<LogsAPIController> _logger;
+        private readonly IConfiguration _configuration;
 
-        public LogsAPIController(ILogger<LogsAPIController> logger)
+        public LogsAPIController(ILogger<LogsAPIController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _configuration = configuration;
         }
 
         [HttpGet(Name = "Getlogs")]
@@ -27,7 +28,7 @@ namespace LogsAPI.Controllers
             return Ok(Enumerable.Range(1, 5).Select(index => new Logs
             {
                 Date = DateTime.Now.AddDays(index),
-                Type = 1,
+                Level = 1,
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray());
@@ -36,11 +37,15 @@ namespace LogsAPI.Controllers
         [HttpPost(Name = "Postlog")]
         public IActionResult Post(Logs log)
         {
+            if (_configuration.GetValue<int>("Logging:LogLevel") > log.Level)
+            {
+                var filename = _configuration.GetValue<string>("Logging:Filename").Replace("{Level}", log.Level.ToString());
 
-            StreamWriter r = new StreamWriter(logsFile, true);
-            var json = JsonConvert.SerializeObject(log);
-            r.WriteLine(json);
-            r.Close();
+                StreamWriter r = new StreamWriter(filename, true);
+                var json = JsonConvert.SerializeObject(log);
+                r.WriteLine(json);
+                r.Close();
+            }
 
             return Ok("Done");
         }
