@@ -1,9 +1,7 @@
 {
   "Logging": {
-    "LogLevel": {
-      "Default": "None",
-      "Microsoft.AspNetCore": "None"
-    }
+    "LogLevel": "0",
+    "Filename": "./log_{Level}.log"
   },
   "AllowedHosts": "*"
 }

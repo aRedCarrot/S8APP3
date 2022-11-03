@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jay\\Desktop\\S8APP3\\Docker\\APP3_FredFanPage\\APP3_FredFanPage.csproj": {}
+    "C:\\Users\\legros02\\Documents\\Ecole\\S8\\APP3\\Git\\S8APP3\\Docker\\APP3_FredFanPage\\APP3_FredFanPage.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jay\\Desktop\\S8APP3\\Docker\\APP3_FredFanPage\\APP3_FredFanPage.csproj": {
+    "C:\\Users\\legros02\\Documents\\Ecole\\S8\\APP3\\Git\\S8APP3\\Docker\\APP3_FredFanPage\\APP3_FredFanPage.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jay\\Desktop\\S8APP3\\Docker\\APP3_FredFanPage\\APP3_FredFanPage.csproj",
+        "projectUniqueName": "C:\\Users\\legros02\\Documents\\Ecole\\S8\\APP3\\Git\\S8APP3\\Docker\\APP3_FredFanPage\\APP3_FredFanPage.csproj",
         "projectName": "APP3_FredFanPage",
-        "projectPath": "C:\\Users\\Jay\\Desktop\\S8APP3\\Docker\\APP3_FredFanPage\\APP3_FredFanPage.csproj",
-        "packagesPath": "C:\\Users\\Jay\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jay\\Desktop\\S8APP3\\Docker\\APP3_FredFanPage\\obj\\",
+        "projectPath": "C:\\Users\\legros02\\Documents\\Ecole\\S8\\APP3\\Git\\S8APP3\\Docker\\APP3_FredFanPage\\APP3_FredFanPage.csproj",
+        "packagesPath": "C:\\Users\\legros02\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\legros02\\Documents\\Ecole\\S8\\APP3\\Git\\S8APP3\\Docker\\APP3_FredFanPage\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Jay\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\legros02\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
