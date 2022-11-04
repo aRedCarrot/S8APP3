@@ -18,15 +18,15 @@ services:
       context: .
       dockerfile: APP3_FredFanPage/Dockerfile
     ports:
-      - "8081:80"
+      - "8082:80"
   watcher:
-    image: claudegp/watcher-app3:latest
-    container_name: watcher
-    restart: always
-    build:
-      context: watcher
-      dockerfile: Dockerfile
-    logging:
-      driver: "none"
-    depends_on:
-      - logs_api
+     image: claudegp/watcher-app3:latest
+     container_name: watcher
+     restart: always
+     build:
+       context: watcher
+       dockerfile: Dockerfile
+     logging:
+       driver: "none"
+     depends_on:
+       - logs_api

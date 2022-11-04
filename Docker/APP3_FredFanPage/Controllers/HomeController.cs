@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using APP3_FredFanPage.Areas.Identity.Data;
 using APP3_FredFanPage.Models;
 using System.Text.Json;
+using APP3_FredFanPage.Services;
 
 namespace APP3_FredFanPage.Controllers
 {
@@ -20,11 +21,11 @@ namespace APP3_FredFanPage.Controllers
     {
         private readonly SqliteConnection _dbConnection;
 
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILoggerClient _logger;
 
         private readonly UserManager<FredFanPageUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<FredFanPageUser> userManager, IConfiguration configuration)
+        public HomeController(ILoggerClient logger, UserManager<FredFanPageUser> userManager, IConfiguration configuration)
         {
             this._logger = logger;
             this._userManager = userManager;
@@ -40,6 +41,8 @@ namespace APP3_FredFanPage.Controllers
         [HttpGet]
         public async Task<IActionResult> Comments()
         {
+            _logger.LogInformation("Comments page");
+
             var comments = new List<string>();
 
             var user = await this._userManager.GetUserAsync(this.User);
@@ -49,16 +52,25 @@ namespace APP3_FredFanPage.Controllers
             }
 
             var cmd = new SqliteCommand($"Select Comment from Comments where UserId ='{user.Id}'", this._dbConnection);
-            this._dbConnection.Open();
-            var rd = await cmd.ExecuteReaderAsync();
+            
+            
+            try
+            { 
+                this._dbConnection.Open();
+                var rd = await cmd.ExecuteReaderAsync();
 
-            while (rd.Read())
-            {
-                comments.Add(rd.GetString(0));
+                while (rd.Read())
+                {
+                    comments.Add(rd.GetString(0));
+                }
+
+                rd.Close();
+                this._dbConnection.Close();
             }
-
-            rd.Close();
-            this._dbConnection.Close();
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
 
             return this.View(comments);
         }
@@ -66,23 +78,34 @@ namespace APP3_FredFanPage.Controllers
         [HttpPost]
         public async Task<IActionResult> Comments(string comment)
         {
+            _logger.LogInformation("New comment");
+
             var user = await this._userManager.GetUserAsync(this.User);
             if (user == null)
             {
                 throw new InvalidOperationException("Vous devez vous connecter");
             }
-           
+
             var cmd = new SqliteCommand(
                 $"insert into Comments (UserId, CommentId, Comment) Values ('{user.Id}','{Guid.NewGuid()}','" + comment + "')",
                 this._dbConnection);
-            this._dbConnection.Open();
-            await cmd.ExecuteNonQueryAsync();
+            try 
+            { 
+                this._dbConnection.Open();
+                await cmd.ExecuteNonQueryAsync();
+        }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
 
             return this.Ok("Commentaire ajouté");
         }
 
         public async Task<IActionResult> Search(string searchData)
         {
+            _logger.LogInformation("New search");
+
             var searchResults = new List<string>();
 
             //var user = await this._userManager.GetUserAsync(this.User);
@@ -92,20 +115,32 @@ namespace APP3_FredFanPage.Controllers
             }
 
             var cmd = new SqliteCommand($"Select Comment from Comments where Comment like '%{searchData}%'", this._dbConnection);
-            this._dbConnection.Open();
-            var rd = await cmd.ExecuteReaderAsync();
-            while (rd.Read())
+
+            try
             {
-                searchResults.Add(rd.GetString(0));
+
+                this._dbConnection.Open();
+                var rd = await cmd.ExecuteReaderAsync();
+                while (rd.Read())
+                {
+                    searchResults.Add(rd.GetString(0));
+                }
+
+                rd.Close();
+                this._dbConnection.Close();
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
             }
 
-            rd.Close();
-            this._dbConnection.Close();
             return Ok(JsonSerializer.Serialize(searchResults));
         }
 
         public IActionResult About()
         {
+            _logger.LogInformation("About page");
+
             return this.View();
         }
 
@@ -118,38 +153,6 @@ namespace APP3_FredFanPage.Controllers
         public IActionResult Error()
         {
             return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
-        }
-
-        [HttpGet]
-        public IActionResult Emails()
-        {
-            return this.View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Emails(object form)
-        {
-            var searchResults = new List<string>();
-
-            var user = await this._userManager.GetUserAsync(this.User);
-            var roles = await this._userManager.GetRolesAsync(user);
-            if (roles.Contains("admin"))
-            {
-                var cmd = new SqliteCommand("select Email from AspNetUsers", this._dbConnection);
-                this._dbConnection.Open();
-                var rd = await cmd.ExecuteReaderAsync();
-                while (rd.Read())
-                {
-                    searchResults.Add(rd.GetString(0));
-                }
-
-                rd.Close();
-
-                this._dbConnection.Close();
-            }
-
-            return this.Json(searchResults);
         }
     }
 }

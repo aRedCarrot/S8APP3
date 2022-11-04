@@ -1,3 +1,5 @@
+using APP3_FredFanPage.Models;
+using APP3_FredFanPage.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -19,8 +21,14 @@ namespace APP3_FredFanPage
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions<LogSettings>()
+                .Configure<IConfiguration>((s, c) => c.GetSection(LogSettings.Section).Bind(s));
+
             services.AddRazorPages();
             services.AddControllersWithViews();
+
+            services.AddHttpClient();
+            services.AddSingleton<ILoggerClient, LoggerClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

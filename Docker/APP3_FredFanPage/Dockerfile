@@ -9,7 +9,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["APP3_FredFanPage/APP3_FredFanPage.csproj", "APP3_FredFanPage/"]
 RUN dotnet restore "APP3_FredFanPage/APP3_FredFanPage.csproj"
-COPY . .
+COPY "APP3_FredFanPage/" "APP3_FredFanPage/"
 WORKDIR "/src/APP3_FredFanPage"
 RUN dotnet build "APP3_FredFanPage.csproj" -c Release -o /app/build
 
