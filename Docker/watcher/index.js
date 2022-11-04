@@ -7,7 +7,7 @@ const f = require('node-fetch');
 
 const ssh = new NodeSSH()
 const API_IP = process.env.API_IP || "localhost";
-const API_PORT = process.env.API_PORT || 8081;
+const API_PORT = process.env.API_PORT || 8082;
 const LOGS_IP = process.env.LOGS_IP || "localhost";
 const LOGS_SSH_PORT = process.env.LOGS_SSH_PORT || 8022;
 

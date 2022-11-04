@@ -20,13 +20,13 @@ services:
     ports:
       - "8082:80"
   watcher:
-     image: claudegp/watcher-app3:latest
-     container_name: watcher
-     restart: always
-     build:
-       context: watcher
-       dockerfile: Dockerfile
-     logging:
-       driver: "none"
-     depends_on:
-       - logs_api
+    image: ${DOCKER_REGISTRY-}watcher-app3:latest
+    container_name: watcher
+    restart: always
+    build:
+      context: watcher
+      dockerfile: Dockerfile
+    logging:
+      driver: "none"
+    depends_on:
+      - logsapi
