@@ -35,5 +35,4 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 #RUN no| apt-get -y install tripwire
 #RUN cat SettingTripWire.txt >> /etc/tripwire/twpol.txt
 #RUN twadmin --create-polfile -s -Q "" -S /etc/tripwire/site.key /etc/tripwire/twpol.txt && tripwire --init -P ""
-RUN echo "service ssh restart" >> /etc/bash.bashrc
-ENTRYPOINT DEBIAN_FRONTEND=noninteractive apt-get -y install tripwire && bash /app/tripwireExec.sh && dotnet LogsAPI.dll
+ENTRYPOINT service ssh restart && DEBIAN_FRONTEND=noninteractive apt-get -y install tripwire && bash /app/tripwireExec.sh && dotnet LogsAPI.dll
