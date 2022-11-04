@@ -17,11 +17,11 @@ services:
       context: .
       dockerfile: APP3_FredFanPage/Dockerfile
     ports:
-      - "8081:80"
-  attacker:
-    image: ${DOCKER_REGISTRY}attacker
-    container_name: attacker
-    restart: always
-    build:
-      context: attacker
-      dockerfile: Dockerfile
+      - "8082:80"
+  #attacker:
+  #  image: ${DOCKER_REGISTRY}attacker
+  #  container_name: attacker
+  #  restart: always
+  #  build:
+  #    context: attacker
+  #    dockerfile: Dockerfile
