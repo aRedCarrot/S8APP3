@@ -4,6 +4,7 @@ services:
   logsapi:
     image: ${DOCKER_REGISTRY-}logsapi
     container_name: logs_api
+    restart: always
     build:
       context: .
       dockerfile: LogsAPI/Dockerfile
@@ -21,6 +22,9 @@ services:
   attacker:
     image: ${DOCKER_REGISTRY}attacker
     container_name: attacker
+    restart: always
     build:
       context: attacker
       dockerfile: Dockerfile
+    depends_on:
+      - logs_api

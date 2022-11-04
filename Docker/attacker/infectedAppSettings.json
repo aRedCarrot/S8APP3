@@ -1,6 +1,6 @@
 {
   "Logging": {
-    "LogLevel": "5",
+    "LogLevel": "0",
     "Filename": "./log_{Level}.log"
   },
   "AllowedHosts": "*"

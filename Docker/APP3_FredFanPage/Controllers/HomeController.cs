@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 using APP3_FredFanPage.Areas.Identity.Data;
 using APP3_FredFanPage.Models;
+using System.Text.Json;
 
 namespace APP3_FredFanPage.Controllers
 {
@@ -85,12 +86,10 @@ namespace APP3_FredFanPage.Controllers
             var searchResults = new List<string>();
 
             //var user = await this._userManager.GetUserAsync(this.User);
-            //if (user == null || string.IsNullOrEmpty(searchData))
-            //{
-            //    return this.View(searchResults);
-            //}
-
-            Console.WriteLine(this._dbConnection);
+            if (string.IsNullOrEmpty(searchData))
+            {
+                return this.View(searchResults);
+            }
 
             var cmd = new SqliteCommand($"Select Comment from Comments where Comment like '%{searchData}%'", this._dbConnection);
             this._dbConnection.Open();
@@ -102,10 +101,7 @@ namespace APP3_FredFanPage.Controllers
 
             rd.Close();
             this._dbConnection.Close();
-
-            //return Ok("Voici le résultat de la recherche" + searchResults);
-
-            return this.View(searchResults);
+            return Ok(JsonSerializer.Serialize(searchResults));
         }
 
         public IActionResult About()

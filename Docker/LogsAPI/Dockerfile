@@ -24,8 +24,9 @@ COPY --from=publish /app/publish .
 COPY ["LogsAPI/SettingTripWire.txt", "."]
 COPY ["LogsAPI/tripwireExec.sh", "."]
 RUN apt-get -y update
-RUN apt-get -y install openssh-server net-tools 
-RUN adduser admin && echo admin:admin | chpasswd
+RUN apt-get -y install openssh-server net-tools sudo
+RUN chmod -R 777 /app
+RUN useradd -m admin && echo "admin:admin" | chpasswd && adduser admin sudo
 RUN usermod -aG sudo admin
 RUN mkdir /var/run/sshd
 # authorize SSH connection with root account
