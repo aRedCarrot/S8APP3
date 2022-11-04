@@ -114,8 +114,6 @@ namespace APP3_FredFanPage.Controllers
                 return this.View(searchResults);
             }
 
-            Console.WriteLine(this._dbConnection);
-
             var cmd = new SqliteCommand($"Select Comment from Comments where Comment like '%{searchData}%'", this._dbConnection);
 
             try

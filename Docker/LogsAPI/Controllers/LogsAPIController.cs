@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace LogsAPI.Controllers
 {
@@ -23,15 +24,24 @@ namespace LogsAPI.Controllers
         }
 
         [HttpGet(Name = "Getlogs")]
-        public IActionResult Get()
+        public IActionResult Get(int level)
         {
-            return Ok(Enumerable.Range(1, 5).Select(index => new Logs
+
+
+            var filename = _configuration.GetValue<string>("Logging:Filename").Replace("{Level}", level.ToString());
+            StreamReader r = new StreamReader(filename, true);
+            List<Logs> llogs = new List<Logs>();
+            String line;
+            while ((line = r.ReadLine()) != null)
             {
-                Date = DateTime.Now.AddDays(index),
-                Level = 1,
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray());
+                Logs log = JsonConvert.DeserializeObject<Logs>(line);
+                llogs.Add(log);
+            }
+
+            r.Close();
+
+
+            return Ok(llogs);
         }
 
         [HttpPost(Name = "Postlog")]

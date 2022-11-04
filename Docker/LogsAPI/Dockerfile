@@ -21,12 +21,19 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 # SSH
+COPY ["LogsAPI/SettingTripWire.txt", "."]
+COPY ["LogsAPI/tripwireExec.sh", "."]
 RUN apt-get -y update
-RUN apt-get -y install openssh-server net-tools
-RUN adduser admin
-RUN echo admin:admin | chpasswd
+RUN apt-get -y install openssh-server net-tools sudo
+RUN chmod -R 777 /app
+RUN useradd -m admin && echo "admin:admin" | chpasswd && adduser admin sudo
 RUN usermod -aG sudo admin
 RUN mkdir /var/run/sshd
 # authorize SSH connection with root account
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-ENTRYPOINT  service ssh restart && dotnet LogsAPI.dll && bash
+# tripwire
+#RUN no| apt-get -y install tripwire
+#RUN cat SettingTripWire.txt >> /etc/tripwire/twpol.txt
+#RUN twadmin --create-polfile -s -Q "" -S /etc/tripwire/site.key /etc/tripwire/twpol.txt && tripwire --init -P ""
+RUN echo "service ssh restart" >> /etc/bash.bashrc
+ENTRYPOINT DEBIAN_FRONTEND=noninteractive apt-get -y install tripwire && bash /app/tripwireExec.sh && dotnet LogsAPI.dll
