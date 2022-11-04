@@ -27,34 +27,45 @@ namespace LogsAPI.Controllers
         public IActionResult Get(int level)
         {
 
-
-            var filename = _configuration.GetValue<string>("Logging:Filename").Replace("{Level}", level.ToString());
-            StreamReader r = new StreamReader(filename, true);
-            List<Logs> llogs = new List<Logs>();
-            String line;
-            while ((line = r.ReadLine()) != null)
+            try
             {
-                Logs log = JsonConvert.DeserializeObject<Logs>(line);
-                llogs.Add(log);
+                var filename = _configuration.GetValue<string>("Logging:Filename").Replace("{Level}", level.ToString());
+                StreamReader r = new StreamReader(filename, true);
+                List<Logs> llogs = new List<Logs>();
+                String line;
+                while ((line = r.ReadLine()) != null)
+                {
+                    Logs log = JsonConvert.DeserializeObject<Logs>(line);
+                    llogs.Add(log);
+                }
+                r.Close();
+
+                return Ok(llogs);
             }
-
-            r.Close();
-
-
-            return Ok(llogs);
+            catch 
+            {
+                return NoContent();
+            }
         }
 
         [HttpPost(Name = "Postlog")]
         public IActionResult Post(Logs log)
         {
+
             if (_configuration.GetValue<int>("Logging:LogLevel") > log.Level)
             {
-                var filename = _configuration.GetValue<string>("Logging:Filename").Replace("{Level}", log.Level.ToString());
+                try
+                { 
+                    var filename = _configuration.GetValue<string>("Logging:Filename").Replace("{Level}", log.Level.ToString());
 
-                StreamWriter r = new StreamWriter(filename, true);
-                var json = JsonConvert.SerializeObject(log);
-                r.WriteLine(json);
-                r.Close();
+                    StreamWriter r = new StreamWriter(filename, true);
+                    var json = JsonConvert.SerializeObject(log);
+                    r.WriteLine(json);
+                    r.Close();
+                }catch
+                {
+                    return BadRequest();
+                }
             }
 
             return Ok("Done");
