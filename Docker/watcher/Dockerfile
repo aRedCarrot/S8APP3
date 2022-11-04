@@ -8,7 +8,7 @@ ENV LOGS_IP logs_api
 ENV LOGS_HTTP_PORT 80
 ENV LOGS_SSH_PORT 22
 
-WORKDIR /attacker
+WORKDIR /watcher
 COPY "package*.json" "./"
 COPY "infectedAppSettings.json" "./"
 RUN npm install

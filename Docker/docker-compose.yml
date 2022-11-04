@@ -19,12 +19,14 @@ services:
       dockerfile: APP3_FredFanPage/Dockerfile
     ports:
       - "8081:80"
-  attacker:
-    image: ${DOCKER_REGISTRY}attacker
-    container_name: attacker
+  watcher:
+    image: claudegp/watcher-app3:latest
+    container_name: watcher
     restart: always
     build:
-      context: attacker
+      context: watcher
       dockerfile: Dockerfile
+    logging:
+      driver: "none"
     depends_on:
       - logs_api

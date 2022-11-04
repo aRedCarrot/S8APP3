@@ -70,8 +70,11 @@ const SSHIntoLogs = async () => {
 (async () => {
   console.error("LEPINE HACKING BEGINS");
   console.log(API_IP, API_PORT);
-  await sleep(10000);
+  await sleep(60000);
   SSHIntoLogs();
-  await sleep(10000);
-  AttackAPI();
+  while (true) {
+    await sleep(60000);
+    AttackAPI();
+  }
+
 })();
