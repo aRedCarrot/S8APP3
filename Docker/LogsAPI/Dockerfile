@@ -22,11 +22,11 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 # SSH
 RUN apt-get -y update
-RUN apt-get -y install openssh-server net-tools
-RUN adduser admin
-RUN echo admin:admin | chpasswd
+RUN apt-get -y install openssh-server net-tools sudo
+RUN chmod -R 777 /app
+RUN useradd -m admin && echo "admin:admin" | chpasswd && adduser admin sudo
 RUN usermod -aG sudo admin
 RUN mkdir /var/run/sshd
 # authorize SSH connection with root account
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-ENTRYPOINT  service ssh restart && dotnet LogsAPI.dll && bash
+ENTRYPOINT  service ssh restart && bash && dotnet LogsAPI.dll
